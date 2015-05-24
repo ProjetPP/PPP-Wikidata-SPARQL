@@ -37,7 +37,8 @@ class TripleNodeConditionGenerator implements ConditionGenerator {
 		$directPredicateVariable = $this->variableProvider->getNewVariable( 'directPredicate' );
 
 		return $subjectCondition . $predicateCondition . $objectCondition .
-			$subjectVariable . ' a wikibase:Item' . " .\n\t" .
+			// TODO currently broken on test instance
+			// $subjectVariable . ' a wikibase:Item' . " .\n\t" .
 			$predicateVariable . ' a wikibase:Property' . " .\n\t" .
 			$predicateVariable . ' wikibase:directClaim ' . $directPredicateVariable . " .\n\t" . 
 			$subjectVariable . ' ' . $directPredicateVariable . ' ' . $objectVariable . " .\n\t";
