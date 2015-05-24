@@ -1,0 +1,27 @@
+{
+	"name": "ppp/wikidata",
+	"description": "Wikidata module for the PPP",
+	"keywords": [
+		"ppp"
+	],
+	"homepage": "https://github.com/ProjetPP/PPP-Wikidata-SPARQL",
+	"license": "GPL-2.0+",
+	"authors": [
+		{
+			"name": "Projet Pensées Profondes",
+			"homepage": "https://github.com/ProjetPP"
+		}
+	],
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"require": {
+		"php": ">=5.5.0",
+		"ppp/data-model": "*",
+		"ppp/libmodule": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"PPP\\WikidataSparql\\": "src/"
+		}
+	}
+}
