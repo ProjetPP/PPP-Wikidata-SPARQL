@@ -72,7 +72,7 @@ class WikidataSparqlEntryPoint {
 		return new ModuleRequest(
 			array_key_exists( 'lang', $_GET ) ? $_GET['lang'] : 'en',
 			new SentenceNode( $_GET['q'] ),
-			'wikidata-sparql-' . time(). '-'. rand( 0, PHP_INT_MAX )
+			'wikidata-sparql-' . time() . '-' . rand( 0, PHP_INT_MAX )
 		);
 	}
 
@@ -96,7 +96,8 @@ class WikidataSparqlEntryPoint {
 	}
 
 	private function buildSparqlQuery( ModuleResponse $response ) {
-		return ''; //TODO
+		$sparqlGenerator = new SparqlGenerator( new ConditionGeneratorFactory( $response->getLanguageCode() ) );
+		return $sparqlGenerator->generateSparql( $response->getSentenceTree() );
 	}
 
 	private function outputResponse( $query ) {
