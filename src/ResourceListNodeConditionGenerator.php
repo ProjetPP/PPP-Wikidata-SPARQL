@@ -7,6 +7,11 @@ use PPP\DataModel\AbstractNode;
 use PPP\DataModel\ResourceListNode;
 use PPP\DataModel\ResourceNode;
 
+/**
+ * @license GNU GPL v2+
+ * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Thomas Pellissier Tanon
+ */
 class ResourceListNodeConditionGenerator implements ConditionGenerator {
 
 	/**
@@ -14,10 +19,16 @@ class ResourceListNodeConditionGenerator implements ConditionGenerator {
 	 */
 	private $languageCode;
 
+	/**
+	 * @param string $languageCode
+	 */
 	public function __construct( $languageCode ) {
 		$this->languageCode = $languageCode;
 	}
 
+	/**
+	 * @see ConditionGenerator
+	 */
 	public function generateCondition( AbstractNode $node, $variableName ) {
 		if ( !( $node instanceof ResourceListNode ) ) {
 			throw new InvalidArgumentException();
@@ -35,6 +46,9 @@ class ResourceListNodeConditionGenerator implements ConditionGenerator {
 			' UNION { ' . $variableName . ' skos:altLabel "' . $value . '"@' . $this->languageCode . ' . }';
 	}
 
+	/**
+	 * @see ConditionGenerator
+	 */
 	public function getType() {
 		return 'list';
 	}

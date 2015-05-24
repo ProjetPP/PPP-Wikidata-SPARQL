@@ -4,6 +4,11 @@ namespace PPP\WikidataSparql;
 
 use PPP\DataModel\AbstractNode;
 
+/**
+ * @license GNU GPL v2+
+ * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Thomas Pellissier Tanon
+ */
 class SparqlGenerator {
 
 	private $prefixes = array(
