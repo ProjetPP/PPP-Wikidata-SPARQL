@@ -1,0 +1,41 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: #e9e9e9 none repeat scroll 0 0;
+	color: #444;
+	font: 14px/1.6 sans-serif;
+}
+
+.wrapper {
+	width: 900px;
+	margin: 50px auto auto;
+}
+
+.form {
+	margin: 20px 0;
+}
+
+.input {
+	width: 790px;
+	font-size: 2em;
+	border: none;
+	padding: 5px;
+	vertical-align: middle;
+}
+
+.button {
+	font-size: 1.5em;
+	vertical-align: middle;
+}
+
+.button .small {
+	font-size: 0.5em;
+	display: block;
+}
+
+.sparql {
+	margin: 20px 0;
+}
