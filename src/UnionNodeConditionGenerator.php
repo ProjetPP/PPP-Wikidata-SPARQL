@@ -30,7 +30,7 @@ class UnionNodeConditionGenerator implements ConditionGenerator {
 	}
 
 	public function getType() {
-		return 'triple';
+		return 'union';
 	}
 
 }

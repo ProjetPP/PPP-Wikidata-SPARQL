@@ -5,8 +5,10 @@ namespace PPP\WikidataSparql;
 use Exception;
 use GuzzleHttp\Client;
 use PPP\DataModel\DeserializerFactory;
+use PPP\DataModel\ResourceListNode;
 use PPP\DataModel\SentenceNode;
 use PPP\DataModel\SerializerFactory;
+use PPP\DataModel\StringResourceNode;
 use PPP\Module\DataModel\Deserializers\ModuleResponseDeserializer;
 use PPP\Module\DataModel\Serializers\ModuleRequestSerializer;
 use PPP\Module\DataModel\ModuleRequest;
@@ -92,7 +94,12 @@ class WikidataSparqlEntryPoint {
 			return $this->buildResponseDeserializer()->deserialize( $responseSerialization );
 		}
 
-		throw new Exception( 'Parsing does not return anything' );
+		return new ModuleResponse(
+			$moduleRequest->getLanguageCode(),
+			new ResourceListNode(
+				[ new StringResourceNode( $moduleRequest->getSentenceTree()->getValue() ) ]
+			)
+		);
 	}
 
 	private function buildSparqlQuery( ModuleResponse $response ) {
