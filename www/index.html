@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>PPP Wikidata SPARQL</title>
+		<script type="text/javascript" src="https://tools-static.wmflabs.org/static/jquery/2.1.0/jquery.min.js"></script>
+		<script type="text/javascript">
+			$( function() {
+				$( '#form' ).submit( function( e ) {
+					var value = $( '#value' ).val();
+					$.get( 'query.php', { q: value }, function( result ) {
+						$( '#sparql' ).text( result );
+					} );
+					return false;
+				} );
+			} );
+		</script>
+	</head>
+	<body>
+		<div class="wrapper">
+			<h1>Generate a SPARQL query</h1>
+			<form id="form">
+				<input type="text" id="value">
+				<input type="submit" value="Give me SPARQL!">
+			</form>
+			<pre id="sparql">
+			</pre>
+		</div>
+	</body>
+</html>
