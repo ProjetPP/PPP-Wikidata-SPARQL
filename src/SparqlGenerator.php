@@ -35,11 +35,11 @@ class SparqlGenerator {
 	public function generateSparql( AbstractNode $node ) {
 		$sparql = implode( "\n", $this->prefixes ) . "\n\n";
 
-		$sparql .= 'SELECT DISTINCT ?result WHERE {' . "\n\t";
+		$sparql .= 'SELECT DISTINCT ?result WHERE {';
 
-		$sparql .= trim( $this->generateWhereConditions( $node ) ) . "\n";
+		$sparql .= str_replace( "\n", "\n\t", $this->generateWhereConditions( $node ) );
 
-		return $sparql . '}';
+		return $sparql . "\n}";
 	}
 
 	/**

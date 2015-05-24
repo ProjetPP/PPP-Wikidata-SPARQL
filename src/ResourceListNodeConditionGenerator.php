@@ -34,9 +34,9 @@ class ResourceListNodeConditionGenerator implements ConditionGenerator {
 			throw new InvalidArgumentException();
 		}
 
-		return '{ ' . implode( ' UNION ', array_map( function( ResourceNode $resourceNode ) use ( $variableName ) {
-			return $this->generateStringCondition( $resourceNode, $variableName );
-		}, $node->toArray() ) ) . ' }' . " .\n\t";
+		return "\n{ " . implode( "\n} UNION {", array_map( function( ResourceNode $resourceNode ) use ( $variableName ) {
+			return str_replace( "\n", "\n\t", "\n" . $this->generateStringCondition( $resourceNode, $variableName ) );
+		}, $node->toArray() ) ) . "\n}";
 	}
 
 	private function generateStringCondition( ResourceNode $resourceNode, $variableName ) {

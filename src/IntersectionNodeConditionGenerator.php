@@ -13,12 +13,13 @@ class IntersectionNodeConditionGenerator implements ConditionGenerator {
 	 */
 	private $conditionGeneratorFactory;
 
-	public function __construct(
-		ConditionGeneratorFactory $conditionGeneratorFactory
-	) {
+	public function __construct( ConditionGeneratorFactory $conditionGeneratorFactory ) {
 		$this->conditionGeneratorFactory = $conditionGeneratorFactory;
 	}
 
+	/**
+	 * @see ConditionGenerator
+	 */
 	public function generateCondition( AbstractNode $node, $variableName ) {
 		if ( !( $node instanceof IntersectionNode ) ) {
 			throw new InvalidArgumentException();
@@ -29,6 +30,9 @@ class IntersectionNodeConditionGenerator implements ConditionGenerator {
 		}, $node->getOperands() ) );
 	}
 
+	/**
+	 * @see ConditionGenerator
+	 */
 	public function getType() {
 		return 'intersection';
 	}

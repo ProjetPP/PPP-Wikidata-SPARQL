@@ -30,9 +30,9 @@ class UnionNodeConditionGenerator implements ConditionGenerator {
 			throw new InvalidArgumentException();
 		}
 
-		return '{ ' . implode( ' UNION ', array_map( function( AbstractNode $subNode ) use ( $variableName ) {
-			return $this->conditionGeneratorFactory->getConditionGenerator( $subNode )->generateCondition( $subNode, $variableName );
-		}, $node->getOperands() ) ) . ' }' . " .\n\t";
+		return "\n{" . implode( "\n} UNION {", array_map( function( AbstractNode $subNode ) use ( $variableName ) {
+			return str_replace( "\n", "\n\t", $this->conditionGeneratorFactory->getConditionGenerator( $subNode )->generateCondition( $subNode, $variableName ) );
+		}, $node->getOperands() ) ) . "\n}";
 	}
 
 	/**
