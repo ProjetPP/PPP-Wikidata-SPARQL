@@ -16,9 +16,8 @@ use PPP\Module\DataModel\ModuleResponse;
 use PPP\Module\HttpException;
 
 /**
- * Tool entry point.
- *
- * @licence GPLv2+
+ * @license GNU GPL v2+
+ * @author Bene* < benestar.wikimedia@gmail.com >
  * @author Thomas Pellissier Tanon
  */
 class WikidataSparqlEntryPoint {

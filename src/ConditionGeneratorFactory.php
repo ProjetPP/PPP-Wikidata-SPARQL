@@ -5,6 +5,11 @@ namespace PPP\WikidataSparql;
 use OutOfBoundsException;
 use PPP\DataModel\AbstractNode;
 
+/**
+ * @license GNU GPL v2+
+ * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Thomas Pellissier Tanon
+ */
 class ConditionGeneratorFactory {
 
 	/**

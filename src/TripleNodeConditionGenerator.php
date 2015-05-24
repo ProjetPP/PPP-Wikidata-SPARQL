@@ -6,6 +6,11 @@ use InvalidArgumentException;
 use PPP\DataModel\AbstractNode;
 use PPP\DataModel\TripleNode;
 
+/**
+ * @license GNU GPL v2+
+ * @author Bene* < benestar.wikimedia@gmail.com >
+ * @author Thomas Pellissier Tanon
+ */
 class TripleNodeConditionGenerator implements ConditionGenerator {
 
 	/**
@@ -26,6 +31,9 @@ class TripleNodeConditionGenerator implements ConditionGenerator {
 		$this->variableProvider = $variableProvider;
 	}
 
+	/**
+	 * @see ConditionGenerator
+	 */
 	public function generateCondition( AbstractNode $node, $variableName ) {
 		if ( !( $node instanceof TripleNode ) ) {
 			throw new InvalidArgumentException();
@@ -55,6 +63,9 @@ class TripleNodeConditionGenerator implements ConditionGenerator {
 		return array( $generator->generateCondition( $node, $newVariableName ), $newVariableName );
 	}
 
+	/**
+	 * @see ConditionGenerator
+	 */
 	public function getType() {
 		return 'triple';
 	}
