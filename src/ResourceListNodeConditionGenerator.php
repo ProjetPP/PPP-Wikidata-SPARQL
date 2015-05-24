@@ -2,6 +2,7 @@
 
 namespace PPP\WikidataSparql;
 
+use InvalidArgumentException;
 use PPP\DataModel\AbstractNode;
 use PPP\DataModel\ResourceListNode;
 use PPP\DataModel\ResourceNode;

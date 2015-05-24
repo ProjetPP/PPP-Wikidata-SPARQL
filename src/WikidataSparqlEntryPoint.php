@@ -5,8 +5,10 @@ namespace PPP\WikidataSparql;
 use Exception;
 use GuzzleHttp\Client;
 use PPP\DataModel\DeserializerFactory;
+use PPP\DataModel\ResourceListNode;
 use PPP\DataModel\SentenceNode;
 use PPP\DataModel\SerializerFactory;
+use PPP\DataModel\StringResourceNode;
 use PPP\Module\DataModel\Deserializers\ModuleResponseDeserializer;
 use PPP\Module\DataModel\Serializers\ModuleRequestSerializer;
 use PPP\Module\DataModel\ModuleRequest;
@@ -72,7 +74,7 @@ class WikidataSparqlEntryPoint {
 		return new ModuleRequest(
 			array_key_exists( 'lang', $_GET ) ? $_GET['lang'] : 'en',
 			new SentenceNode( $_GET['q'] ),
-			'wikidata-sparql-' . time(). '-'. rand( 0, PHP_INT_MAX )
+			'wikidata-sparql-' . time() . '-' . rand( 0, PHP_INT_MAX )
 		);
 	}
 
@@ -92,11 +94,17 @@ class WikidataSparqlEntryPoint {
 			return $this->buildResponseDeserializer()->deserialize( $responseSerialization );
 		}
 
-		throw new Exception( 'Parsing does not return anything' );
+		return new ModuleResponse(
+			$moduleRequest->getLanguageCode(),
+			new ResourceListNode(
+				[ new StringResourceNode( $moduleRequest->getSentenceTree()->getValue() ) ]
+			)
+		);
 	}
 
 	private function buildSparqlQuery( ModuleResponse $response ) {
-		return ''; //TODO
+		$sparqlGenerator = new SparqlGenerator( new ConditionGeneratorFactory( $response->getLanguageCode() ) );
+		return $sparqlGenerator->generateSparql( $response->getSentenceTree() );
 	}
 
 	private function outputResponse( $query ) {

@@ -2,12 +2,13 @@
 
 namespace PPP\WikidataSparql;
 
+use OutOfBoundsException;
 use PPP\DataModel\AbstractNode;
 
 class ConditionGeneratorFactory {
 
 	/**
-	 * @var ConditioGenerator[]
+	 * @var ConditionGenerator[]
 	 */
 	private $conditionGenerators;
 
@@ -16,12 +17,12 @@ class ConditionGeneratorFactory {
 	 */
 	public function __construct( $languageCode ) {
 		$this->registerConditionGenerator( new ResourceListNodeConditionGenerator( $languageCode ) );
-		$this->registerConditionGenerator( new MissingNodeConditionGenerator() );
 		$this->registerConditionGenerator( new TripleNodeConditionGenerator( $this, new VariableProvider() ) );
+		$this->registerConditionGenerator( new UnionNodeConditionGenerator( $this ) );
 	}
 
 	/**
-	 * @param ConditioGenerator $generator
+	 * @param ConditionGenerator $generator
 	 */
 	public function registerConditionGenerator( ConditionGenerator $generator ) {
 		$this->conditionGenerators[$generator->getType()] = $generator;
@@ -29,7 +30,7 @@ class ConditionGeneratorFactory {
 
 	/**
 	 * @param AbstractNode $node
-	 * @return ConditioGenerator
+	 * @return ConditionGenerator
 	 */
 	public function getConditionGenerator( AbstractNode $node ) {
 		if ( !isset( $this->conditionGenerators[$node->getType()] ) ) {
