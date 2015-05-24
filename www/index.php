@@ -1,8 +1,6 @@
 <?php
 
-namespace PPP\Wikidata;
-
-use PPP\WikidataSparql\WikidataSparqlEntryPoint;
+namespace PPP\WikidataSparql;
 
 require_once(__DIR__ . '/../vendor/autoload.php');
 

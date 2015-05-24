@@ -65,12 +65,12 @@ class WikidataSparqlEntryPoint {
 	 * @return ModuleRequest
 	 */
 	private function getRequest() {
-		if( !array_key_exists( 'q', $_GET )|| !array_key_exists( 'lang', $_GET ) ) {
-			throw new HttpException( 'You should provide a query and a language', 400 );
+		if( !array_key_exists( 'q', $_GET ) ) {
+			throw new HttpException( 'You should provide a query', 400 );
 		}
 
-		return new ModuleRequest( 
-			$_GET['lang'],
+		return new ModuleRequest(
+			array_key_exists( 'lang', $_GET ) ? $_GET['lang'] : 'en',
 			new SentenceNode( $_GET['q'] ),
 			'wikidata-sparql-' . time(). '-'. rand( 0, PHP_INT_MAX )
 		);
@@ -84,7 +84,7 @@ class WikidataSparqlEntryPoint {
 		);
 
 
-		if( $response->getStatusCode()!== 200 ) {
+		if( $response->getStatusCode() !== 200 ) {
 			throw new Exception( 'The parsing failed' );
 		}
 
@@ -114,16 +114,8 @@ class WikidataSparqlEntryPoint {
 		return new ModuleRequestSerializer( $serializerFactory->newNodeSerializer() );
 	}
 
-	private function outputHttpException( HttpException $exception ){
-		$this->setHttpResponseCode( $exception->getCode() );
+	private function outputHttpException( HttpException $exception ) {
+		@http_response_code( $exception->getCode() );
 		echo $exception->getMessage();
-	}
-
-	private function setHttpResponseCode( $code ) {
-		if( function_exists( 'http_response_code' ) ) {
-			@http_response_code( $code );
-		} else {
-			@header( 'X-PHP-Response-Code: '. $code, true, $code );
-		}
 	}
 }
