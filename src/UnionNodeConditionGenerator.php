@@ -32,7 +32,7 @@ class UnionNodeConditionGenerator implements ConditionGenerator {
 
 		return '{ ' . implode( ' UNION ', array_map( function( AbstractNode $subNode ) use ( $variableName ) {
 			return $this->conditionGeneratorFactory->getConditionGenerator( $subNode )->generateCondition( $subNode, $variableName );
-		}, $node ) ) . ' }' . " .\n\t";
+		}, $node->getOperands() ) ) . ' }' . " .\n\t";
 	}
 
 	/**
