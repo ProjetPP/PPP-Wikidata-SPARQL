@@ -14,8 +14,7 @@ class SparqlGenerator {
 	private $prefixes = array(
 		"PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>",
 		"PREFIX skos: <http://www.w3.org/2004/02/skos/core#>",
-		"PREFIX wikibase: <http://wikiba.se/ontology#>",
-		"PREFIX wdt: <http://www.wikidata.org/prop/direct/>"
+		"PREFIX wikibase: <http://wikiba.se/ontology#>"
 	);
 
 	/**
@@ -34,11 +33,11 @@ class SparqlGenerator {
 	 * @return string
 	 */
 	public function generateSparql( AbstractNode $node ) {
-		$sparql = implode( "\n", $this->prefixes ) . "\n";
+		$sparql = implode( "\n", $this->prefixes ) . "\n\n";
 
 		$sparql .= 'SELECT DISTINCT ?result WHERE {' . "\n\t";
 
-		$sparql .= $this->generateWhereConditions( $node ) . "\n";
+		$sparql .= trim( $this->generateWhereConditions( $node ) ) . "\n";
 
 		return $sparql . '}';
 	}
