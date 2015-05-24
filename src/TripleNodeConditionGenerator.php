@@ -45,12 +45,12 @@ class TripleNodeConditionGenerator implements ConditionGenerator {
 
 		$directPredicateVariable = $this->variableProvider->getNewVariable( 'directPredicate' );
 
-		return '{' . $subjectCondition . $predicateCondition . $objectCondition .
+		return "{\n\t\t" . str_replace( "\n", "\n\t", $subjectCondition . $predicateCondition . $objectCondition .
 			// TODO currently broken on test instance
 			// $subjectVariable . ' a wikibase:Item' . " .\n\t" .
 			$predicateVariable . ' a wikibase:Property' . " .\n\t" .
 			$predicateVariable . ' wikibase:directClaim ' . $directPredicateVariable . " .\n\t" . 
-			$subjectVariable . ' ' . $directPredicateVariable . ' ' . $objectVariable . ' . }' . " .\n\t";
+			$subjectVariable . ' ' . $directPredicateVariable . ' ' . $objectVariable ) . " . \n\t} .\n\t";
 	}
 
 	private function formatAbstractNode( AbstractNode $node, $variableName, $prefix ) {

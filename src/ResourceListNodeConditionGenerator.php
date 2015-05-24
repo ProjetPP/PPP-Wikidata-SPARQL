@@ -42,7 +42,7 @@ class ResourceListNodeConditionGenerator implements ConditionGenerator {
 	private function generateStringCondition( ResourceNode $resourceNode, $variableName ) {
 		// only StringResourceNodes are supposed to occur here
 		$value = addslashes( $resourceNode->getValue() );
-		return ' { ' . $variableName . ' rdfs:label "' . $value . '"@' . $this->languageCode . ' . }' .
+		return '{ ' . $variableName . ' rdfs:label "' . $value . '"@' . $this->languageCode . ' . }' .
 			' UNION { ' . $variableName . ' skos:altLabel "' . $value . '"@' . $this->languageCode . ' . }';
 	}
 
