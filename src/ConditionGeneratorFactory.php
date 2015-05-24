@@ -19,6 +19,7 @@ class ConditionGeneratorFactory {
 		$this->registerConditionGenerator( new ResourceListNodeConditionGenerator( $languageCode ) );
 		$this->registerConditionGenerator( new TripleNodeConditionGenerator( $this, new VariableProvider() ) );
 		$this->registerConditionGenerator( new UnionNodeConditionGenerator( $this ) );
+		$this->registerConditionGenerator( new IntersectionNodeConditionGenerator( $this ) );
 	}
 
 	/**
