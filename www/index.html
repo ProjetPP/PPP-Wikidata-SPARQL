@@ -26,6 +26,11 @@
 					$( '#question' ).val( location.hash.substring( 1 ) );
 					$( '#form' ).submit();
 				}
+
+				$( window ).bind( 'hashchange', function() {
+					$( '#question' ).val( location.hash.substring( 1 ) );
+					$( '#form' ).submit();
+				} );
 			} );
 		</script>
 	</head>
