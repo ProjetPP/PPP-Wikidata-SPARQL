@@ -9,6 +9,7 @@
 			$( function() {
 				$( '#form' ).submit( function() {
 					var value = $( '#value' ).val();
+					$( '#sparql' ).html( '<i>Loading...</i>' );
 					$.get( 'query.php', { q: value }, function( result ) {
 						$( '#sparql' ).text( result );
 					} );

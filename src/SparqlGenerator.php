@@ -38,6 +38,8 @@ class SparqlGenerator {
 
 		$sparql .= 'SELECT DISTINCT ?result WHERE {';
 
+		// Query optimizer is actually not working for UNION, so disable it
+		// See https://phabricator.wikimedia.org/T100235
 		$sparql .= "\n\t" . 'hint:Query hint:optimizer "None" .' . "\n";
 
 		$sparql .= str_replace( "\n", "\n\t", $this->generateWhereConditions( $node ) );
