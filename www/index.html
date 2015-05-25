@@ -11,7 +11,7 @@
 					var question = $( '#question' ).val();
 					$( '#sparql' ).html( '<i>Loading...</i>' );
 					$( '.link' ).html( '' );
-					location.hash = '#' + question;
+					location.hash = '#' + encodeURIComponent( question );
 					$.get( 'query.php', { q: question }, function( result ) {
 						$( '#sparql' ).text( result );
 						$( '.link' ).html( $( '<a>', {
@@ -23,12 +23,12 @@
 				} );
 
 				if ( location.hash ) {
-					$( '#question' ).val( location.hash.substring( 1 ) );
+					$( '#question' ).val( decodeURIComponent( location.hash.substring( 1 ) ) );
 					$( '#form' ).submit();
 				}
 
 				$( window ).bind( 'hashchange', function() {
-					$( '#question' ).val( location.hash.substring( 1 ) );
+					$( '#question' ).val( decodeURIComponent( location.hash.substring( 1 ) ) );
 					$( '#form' ).submit();
 				} );
 			} );
