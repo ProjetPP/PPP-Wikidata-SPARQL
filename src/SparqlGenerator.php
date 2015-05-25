@@ -23,9 +23,7 @@ class SparqlGenerator {
 	 */
 	private $conditionGeneratorFactory;
 
-	public function __construct(
-		ConditionGeneratorFactory $conditionGeneratorFactory
-	) {
+	public function __construct( ConditionGeneratorFactory $conditionGeneratorFactory ) {
 		$this->conditionGeneratorFactory = $conditionGeneratorFactory;
  	}
 
@@ -36,15 +34,17 @@ class SparqlGenerator {
 	public function generateSparql( AbstractNode $node ) {
 		$sparql = implode( "\n", $this->prefixes ) . "\n\n";
 
-		$sparql .= 'SELECT DISTINCT ?result WHERE {';
+		$sparql .= 'SELECT DISTINCT ?result ?label WHERE {';
 
 		// Query optimizer is actually not working for UNION, so disable it
 		// See https://phabricator.wikimedia.org/T100235
 		$sparql .= "\n\t" . 'hint:Query hint:optimizer "None" .' . "\n";
 
-		$sparql .= str_replace( "\n", "\n\t", $this->generateWhereConditions( $node ) );
+		$sparql .= str_replace( "\n", "\n\t", $this->generateWhereConditions( $node ) )
+				. "\n\n\t" . 'OPTIONAL { ?result rdfs:label ?label FILTER (LANG(?label) = "'
+				. $this->conditionGeneratorFactory->getLanguageCode() . '") . }' . "\n}";
 
-		return $sparql . "\n}";
+		return $sparql;
 	}
 
 	/**

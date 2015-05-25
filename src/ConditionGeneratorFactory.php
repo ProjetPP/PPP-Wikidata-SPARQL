@@ -18,13 +18,27 @@ class ConditionGeneratorFactory {
 	private $conditionGenerators;
 
 	/**
+	 * @var string
+	 */
+	private $languageCode;
+
+	/**
 	 * @param string $languageCode
 	 */
 	public function __construct( $languageCode ) {
+		$this->languageCode = $languageCode;
+
 		$this->registerConditionGenerator( new ResourceListNodeConditionGenerator( $languageCode ) );
 		$this->registerConditionGenerator( new TripleNodeConditionGenerator( $this, new VariableProvider() ) );
 		$this->registerConditionGenerator( new UnionNodeConditionGenerator( $this ) );
 		$this->registerConditionGenerator( new IntersectionNodeConditionGenerator( $this ) );
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLanguageCode() {
+		return $this->languageCode;
 	}
 
 	/**
