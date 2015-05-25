@@ -12,6 +12,7 @@ body {
 .wrapper {
 	width: 900px;
 	margin: 50px auto auto;
+	padding: 20px;
 }
 
 .form {
@@ -19,7 +20,7 @@ body {
 }
 
 .input {
-	width: 750px;
+	width: 700px;
 	font-size: 2em;
 	border: none;
 	padding: 5px;

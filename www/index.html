@@ -8,13 +8,24 @@
 		<script type="text/javascript">
 			$( function() {
 				$( '#form' ).submit( function() {
-					var value = $( '#value' ).val();
+					var question = $( '#question' ).val();
 					$( '#sparql' ).html( '<i>Loading...</i>' );
-					$.get( 'query.php', { q: value }, function( result ) {
+					$( '.link' ).html( '' );
+					location.hash = '#' + question;
+					$.get( 'query.php', { q: question }, function( result ) {
 						$( '#sparql' ).text( result );
+						$( '.link' ).html( $( '<a>', {
+							href: 'http://wdqs-beta.wmflabs.org/#' + encodeURIComponent( result ),
+							target: '_blank'
+						} ).text( 'Execute this query' ) );
 					} );
 					return false;
 				} );
+
+				if ( location.hash ) {
+					$( '#question' ).val( location.hash.substring( 1 ) );
+					$( '#form' ).submit();
+				}
 			} );
 		</script>
 	</head>
@@ -22,11 +33,13 @@
 		<div class="wrapper">
 			<h1>Generate a SPARQL query</h1>
 			<form id="form" class="form">
-				<input type="text" class="input" id="value">
+				<input type="text" class="input" id="question">
 				<button class="button"><span class="small">Give me the</span>SPARQL</button>
 			</form>
 			<pre id="sparql" class="sparql">
 			</pre>
+			<div class="link">
+			</div>
 		</div>
 	</body>
 </html>
