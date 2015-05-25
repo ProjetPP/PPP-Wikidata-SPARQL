@@ -4,6 +4,7 @@ namespace PPP\WikidataSparql;
 
 use Exception;
 use GuzzleHttp\Client;
+use PPP\DataModel\AbstractNode;
 use PPP\DataModel\DeserializerFactory;
 use PPP\DataModel\ResourceListNode;
 use PPP\DataModel\SentenceNode;
@@ -14,6 +15,7 @@ use PPP\Module\DataModel\Serializers\ModuleRequestSerializer;
 use PPP\Module\DataModel\ModuleRequest;
 use PPP\Module\DataModel\ModuleResponse;
 use PPP\Module\HttpException;
+use PPP\Module\TreeSimplifier\NodeSimplifierFactory;
 
 /**
  * @license GNU GPL v2+
@@ -103,7 +105,15 @@ class WikidataSparqlEntryPoint {
 
 	private function buildSparqlQuery( ModuleResponse $response ) {
 		$sparqlGenerator = new SparqlGenerator( new ConditionGeneratorFactory( $response->getLanguageCode() ) );
-		return $sparqlGenerator->generateSparql( $response->getSentenceTree() );
+		return $sparqlGenerator->generateSparql( $this->simplifyTree( $response->getSentenceTree() ) );
+	}
+
+	private function simplifyTree( AbstractNode $node ) {
+		$simplifierFactory = new NodeSimplifierFactory( [
+			new SpecificTripleNodeSimplifier()
+		] );
+
+		return $simplifierFactory->newNodeSimplifier()->simplify( $node );
 	}
 
 	private function outputResponse( $query ) {
