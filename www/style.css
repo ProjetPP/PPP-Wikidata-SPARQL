@@ -13,6 +13,7 @@ body {
 	width: 900px;
 	margin: 50px auto auto;
 	padding: 20px;
+	min-height: 500px;
 }
 
 .form {
@@ -39,4 +40,16 @@ body {
 
 .sparql {
 	margin: 20px 0;
+}
+
+.footer {
+	padding: 40px 0 0;
+	margin: 20px 0 0;
+	text-align: center;
+	background-color: #999999;
+}
+
+.footer img {
+	vertical-align: middle;
+	margin: 10px;
 }

@@ -28,8 +28,10 @@
 				}
 
 				$( window ).bind( 'hashchange', function() {
-					$( '#question' ).val( decodeURIComponent( location.hash.substring( 1 ) ) );
-					$( '#form' ).submit();
+					if ( location.hash ) {
+						$( '#question' ).val( decodeURIComponent( location.hash.substring( 1 ) ) );
+						$( '#form' ).submit();
+					}
 				} );
 			} );
 		</script>
@@ -45,6 +47,12 @@
 			</pre>
 			<div class="link">
 			</div>
+		</div>
+		<div class="footer">
+			Powered by <a href="//www.wikidata.org/">Wikidata</a> and <a href="//projetpp.github.io/">Platypus</a>.
+			<br>
+			<img src="wikidata.svg" height="50" title="Wikidata" alt="Wikidata">
+			<img src="platypus.svg" height="50" title="Platypus" alt="Platypus">
 		</div>
 	</body>
 </html>
