@@ -1,0 +1,9 @@
+{
+	"name" : "ppp-sparql",
+	"title" : "PPP Wikidata SPARQL",
+	"description" : "Generate SPARQL queries for Wikidata from natural language questions.",
+	"url" : "https://tools.wmflabs.org/ppp-sparql/",
+	"keywords" : "Platypus, Projet Pensées Profondes",
+	"author" : "Tpt, Bene*",
+	"repository" : "https://github.com/ProjetPP/PPP-Wikidata-SPARQL"
+}
