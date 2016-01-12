@@ -86,12 +86,11 @@ class WikidataSparqlEntryPoint {
 			[ 'json' => $this->buildRequestSerializer()->serialize( $moduleRequest ) ]
 		);
 
-
 		if( $response->getStatusCode() !== 200 ) {
 			throw new Exception( 'The parsing failed' );
 		}
 
-		foreach( $response->json() as $responseSerialization ) {
+		foreach( json_decode($response->getBody(), true ) as $responseSerialization ) {
 			return $this->buildResponseDeserializer()->deserialize( $responseSerialization );
 		}
 
