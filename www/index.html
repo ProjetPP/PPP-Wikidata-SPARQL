@@ -15,7 +15,7 @@
 					$.get( 'query.php', { q: question }, function( result ) {
 						$( '#sparql' ).text( result );
 						$( '.link' ).html( $( '<a>', {
-							href: '//wdqs-beta.wmflabs.org/#' + encodeURIComponent( result ),
+							href: '//query.wikidata.org/#' + encodeURIComponent( result ),
 							target: '_blank'
 						} ).text( 'Execute this query' ) );
 					} );
