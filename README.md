@@ -7,11 +7,6 @@ powered by [Wikidata](https://www.wikidata.org/) and [Platypus](https://projetpp
 
 Running this project this requires PHP and [composer](https://getcomposer.org/).
 
-Navigate to the diretory where your web server serves files from, then run the following commands:
-```
-git clone https://github.com/ProjetPP/PPP-Wikidata-SPARQL.git
-cd PPP-Wikidata-SPARQL
-composer install
-```
+To install the application, clone the repository and `composer install` within its root directory.
 
-Then open `http://localhost/PPP-Wikidata-SPARQL/www` in your browser.
+You can then serve the application using your local web server, or using PHP's built-in server: run `php -S localhost:8080 -t www/` and open http://localhost:8080 in your browser.
