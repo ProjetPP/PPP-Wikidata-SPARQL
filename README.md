@@ -5,7 +5,7 @@ powered by [Wikidata](https://www.wikidata.org/) and [Platypus](https://projetpp
 
 ## Development
 
-Running this project this requires a web server and the [Composer](https://getcomposer.org/) tool.
+Running this project this requires PHP and [composer](https://getcomposer.org/).
 
 Navigate to the diretory where your web server serves files from, then run the following commands:
 ```
